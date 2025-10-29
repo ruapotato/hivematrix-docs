@@ -1,0 +1,65 @@
+site_name: HiveMatrix Documentation
+site_description: Documentation for the HiveMatrix MSP platform
+site_author: HiveMatrix Team
+site_url: https://ruapotato.github.io/hivematrix-docs/
+
+repo_name: ruapotato/hivematrix-docs
+repo_url: https://github.com/ruapotato/hivematrix-docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search
+  - autorefs
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Architecture: ARCHITECTURE.md
+  - AI Development Guide: CLAUDE.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ruapotato
