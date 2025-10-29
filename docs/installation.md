@@ -127,12 +127,14 @@ After installation completes, you'll see:
   HiveMatrix is Ready!
 ================================================================
 
-  Login URL:         https://localhost:443
+  Login URL:         https://YOUR_SERVER_IP:443
   Helm Dashboard:    http://localhost:5004
 
   Default Login:
     Username: admin
     Password: admin
+
+  Important: Use your server's IP address, not localhost!
 
 ================================================================
 ```
@@ -141,26 +143,21 @@ After installation completes, you'll see:
 
 ### Installing Specific Services
 
-By default, Core and Nexus are installed (required). Additional services are installed on-demand:
+Use the `install_manager.py` script to install additional services:
 
 ```bash
-# The system will detect and offer to install additional services
-# when you access them through the UI
-```
-
-Alternatively, clone services manually:
-
-```bash
-cd ~/Work/hivematrix
-
-# Clone desired services
-git clone https://github.com/ruapotato/hivematrix-codex
-git clone https://github.com/ruapotato/hivematrix-ledger
-git clone https://github.com/ruapotato/hivematrix-knowledgetree
-git clone https://github.com/ruapotato/hivematrix-brainhair
-
-# Restart to auto-detect new services
 cd hivematrix-helm
+
+# Install individual modules
+sudo ./install_manager.py install codex       # Central data hub
+sudo ./install_manager.py install ledger      # Billing system
+sudo ./install_manager.py install knowledgetree  # Knowledge base (requires Neo4j)
+sudo ./install_manager.py install brainhair   # AI assistant
+
+# Or install all default apps at once
+sudo ./install_manager.py install-defaults
+
+# Restart to activate new services
 ./stop.sh
 ./start.sh
 ```
@@ -218,10 +215,14 @@ NEXUS
 
 ### Test Web Access
 
-1. Open browser to https://localhost:443
+1. Open browser to `https://YOUR_SERVER_IP:443` (replace with your server's IP address)
+   - **Note**: `https://localhost:443` will NOT work - you must use the server's actual IP address
+   - Example: `https://192.168.1.100:443`
 2. Accept self-signed certificate warning (on first visit)
 3. You should see the Keycloak login page
 4. Log in with admin/admin
+
+**Important**: HiveMatrix requires accessing via IP address, not localhost, due to how the authentication system handles redirects.
 
 ### Run Security Audit
 

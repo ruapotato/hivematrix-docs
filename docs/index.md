@@ -58,9 +58,9 @@ The installation will:
 
 ### Access
 
-- **Main Interface**: https://localhost:443
-- **Helm Dashboard**: http://localhost:5004
-- **Keycloak Admin**: http://localhost:8080
+- **Main Interface**: https://YOUR_SERVER_IP:443 (use your server's actual IP address, not localhost)
+- **Helm Dashboard**: http://localhost:5004 (local only)
+- **Keycloak Admin**: http://localhost:8080 (local only)
 
 ## Architecture Overview
 
