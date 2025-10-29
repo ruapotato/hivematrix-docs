@@ -69,3 +69,4 @@ This documentation uses [Material for MkDocs](https://squidfunk.github.io/mkdocs
 ## 📄 License
 
 MIT License - See [LICENSE](LICENSE) file for details
+
