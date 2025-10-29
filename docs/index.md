@@ -5,6 +5,11 @@ Welcome to the HiveMatrix platform documentation. HiveMatrix is a modular, AI-ma
 ## Quick Links
 
 - [Architecture & Development Guide](ARCHITECTURE.md) - Complete technical architecture and development guidelines
+- [Installation Guide](installation.md) - Step-by-step installation instructions
+- [Configuration Guide](configuration.md) - System and service configuration
+- [Services Overview](services-overview.md) - Detailed service descriptions
+- [Security Guide](security.md) - Security hardening and best practices
+- [AI Tools Reference](ai-tools-reference.md) - Brainhair AI assistant tools
 - [Claude AI Guide](CLAUDE.md) - Instructions for AI assistants working on HiveMatrix
 
 ## What is HiveMatrix?
@@ -132,7 +137,9 @@ sudo python3 restore.py /tmp/hivematrix_backup_*.zip
 
 ## Documentation Structure
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Complete technical documentation including:
+### Core Documentation
+
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Complete technical documentation (2,343 lines)
   - Core philosophy and goals
   - Service patterns and architecture
   - Authentication and authorization
@@ -141,12 +148,53 @@ sudo python3 restore.py /tmp/hivematrix_backup_*.zip
   - Development tools and debugging
   - Security architecture
   - Database best practices
+  - Brainhair AI assistant with approval flow
 
-- **[CLAUDE.md](CLAUDE.md)** - AI assistant guidelines for:
+- **[installation.md](installation.md)** - Installation guide (438 lines)
+  - System requirements
+  - Quick start installation
+  - Step-by-step setup
+  - Service verification
+  - Troubleshooting
+  - Autostart configuration
+
+- **[configuration.md](configuration.md)** - Configuration reference (480 lines)
+  - Master configuration structure
+  - Service registry management
+  - Database settings
+  - Port assignments
+  - SSL/TLS setup
+  - Performance tuning
+
+- **[services-overview.md](services-overview.md)** - Service descriptions (272 lines)
+  - Core services (Core, Nexus, Helm)
+  - Application services (Codex, Ledger, KnowledgeTree, Brainhair)
+  - Service dependencies and APIs
+  - Key features and endpoints
+
+- **[security.md](security.md)** - Security hardening (271 lines)
+  - Zero-trust network model
+  - Firewall configuration
+  - Service binding requirements
+  - Security verification
+  - Production deployment hardening
+  - Common security issues
+
+- **[ai-tools-reference.md](ai-tools-reference.md)** - Brainhair AI tools
+  - Complete list of AI tools
+  - Tool usage examples
+  - Approval flow documentation
+  - PHI/CJIS filtering guide
+  - Creating custom tools
+
+### Developer Documentation
+
+- **[CLAUDE.md](CLAUDE.md)** - AI assistant guidelines (714 lines)
   - Understanding HiveMatrix structure
   - Making code changes
   - Following conventions
   - Debugging issues
+  - Testing checklist
 
 ## Contributing
 
