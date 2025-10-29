@@ -73,7 +73,7 @@ Then restart to run with all installed modules:
 
 ### 1. Install PostgreSQL (Required)
 
-HiveMatrix requires PostgreSQL for most services:
+HiveMatrix requires PostgreSQL for most services. Just install it and make sure it's running - the install scripts will handle all configuration:
 
 #### Ubuntu 24.04 PostgreSQL Installation
 
@@ -90,19 +90,11 @@ sudo systemctl enable postgresql
 sudo systemctl status postgresql
 ```
 
-#### Create PostgreSQL User for HiveMatrix
-
-```bash
-# Switch to postgres user
-sudo -u postgres psql
-
-# In PostgreSQL prompt, create user and grant privileges:
-CREATE USER hivematrix WITH PASSWORD 'your-secure-password';
-ALTER USER hivematrix CREATEDB;
-\q
-```
-
-**Note**: HiveMatrix services will create their own databases automatically. The `start.sh` script handles database creation.
+**That's it!** The HiveMatrix installer will:
+- Prompt you for database passwords during setup
+- Create database users automatically
+- Create all required databases
+- Configure service connections
 
 ### 2. Clone Helm Repository
 
