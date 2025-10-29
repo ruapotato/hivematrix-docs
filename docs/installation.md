@@ -22,6 +22,18 @@ This guide will walk you through installing HiveMatrix from scratch on a Linux s
 
 The recommended installation workflow:
 
+### 1. Install PostgreSQL First
+
+```bash
+# Install and start PostgreSQL
+sudo apt update
+sudo apt install -y postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
+
+### 2. Install HiveMatrix
+
 ```bash
 # Create HiveMatrix directory
 mkdir hivematrix
@@ -41,7 +53,7 @@ The `start.sh` script will:
 2. ✓ Set up Python virtual environment
 3. ✓ Download and configure Keycloak
 4. ✓ Clone Core and Nexus repositories
-5. ✓ Set up PostgreSQL databases
+5. ✓ Prompt for database passwords and set up databases
 6. ✓ Generate SSL certificates for HTTPS
 7. ✓ Configure all services
 8. ✓ Start the platform
