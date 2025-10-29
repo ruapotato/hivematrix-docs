@@ -202,9 +202,30 @@ Brainhair allows administrators to manage HiveMatrix using natural language whil
 ### Archive
 **Repository**: [hivematrix-archive](https://github.com/ruapotato/hivematrix-archive)
 **Port**: 5012
-**Database**: PostgreSQL + File Storage
+**Database**: PostgreSQL
 
-Document and file archival system (coming soon).
+Immutable billing snapshot storage service. Archive captures permanent records of billing data:
+
+- **Billing Snapshots**: Stores finalized bills from Ledger as immutable records
+- **Historical Lookup**: Search past bills by company, year, and month
+- **CSV Export**: Download invoices for accounting and auditing
+- **Automated Capture**: Scheduled monthly snapshots of all company billing
+- **Audit Trail**: Complete history of accepted bills with timestamps
+
+**Key Features**:
+- Permanent, unchangeable billing records
+- Integration with Ledger's "Accept Bill" button
+- Automated monthly snapshot creation
+- Search by company, period, or invoice number
+- CSV invoice downloads
+- Job tracking for scheduled snapshots
+
+**API Endpoints**:
+- `/api/snapshot` - Create billing snapshot
+- `/api/snapshot/{invoice_number}` - Retrieve specific snapshot
+- `/api/snapshot/{invoice_number}/csv` - Download CSV invoice
+- `/api/snapshots/search` - Search historical bills
+- `/api/scheduler/config` - Configure automated snapshots
 
 ### Template
 **Repository**: [hivematrix-template](https://github.com/ruapotato/hivematrix-template)
