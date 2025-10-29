@@ -19,7 +19,7 @@
 
 2. **Local ARCHITECTURE.md** (if working offline):
    ```bash
-   # Location: hivematrix-helm/ARCHITECTURE.md
+   # Location: hivematrix-docs/docs/ARCHITECTURE.md
    ```
 
 **The ARCHITECTURE documentation is the single source of truth for this project.** All patterns, conventions, and design decisions are documented there. Violating the architecture will break the system.
