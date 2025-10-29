@@ -20,9 +20,11 @@ This guide will walk you through installing HiveMatrix from scratch on a Linux s
 
 ## Quick Start
 
-The recommended installation workflow:
+Complete installation workflow for Ubuntu 24.04:
 
-### 1. Install PostgreSQL First
+### 1. Install Databases
+
+#### PostgreSQL (Required)
 
 ```bash
 # Install and start PostgreSQL
@@ -32,12 +34,34 @@ sudo systemctl start postgresql
 sudo systemctl enable postgresql
 ```
 
+#### Neo4j (Optional - only if using KnowledgeTree)
+
+```bash
+# Install Java (required for Neo4j)
+sudo apt install -y openjdk-21-jre-headless
+
+# Add Neo4j repository
+wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/neo4j.gpg
+echo 'deb [signed-by=/usr/share/keyrings/neo4j.gpg] https://debian.neo4j.com stable latest' | sudo tee /etc/apt/sources.list.d/neo4j.list
+
+# Install Neo4j
+sudo apt update
+sudo apt install -y neo4j
+
+# Set initial password (remember this for KnowledgeTree config later)
+sudo neo4j-admin dbms set-initial-password your-secure-password
+
+# Enable and start Neo4j
+sudo systemctl enable neo4j
+sudo systemctl start neo4j
+```
+
 ### 2. Install HiveMatrix
 
 ```bash
 # Create HiveMatrix directory
-mkdir hivematrix
-cd hivematrix
+mkdir ~/hivematrix
+cd ~/hivematrix
 
 # Clone the orchestration system
 git clone https://github.com/ruapotato/hivematrix-helm
@@ -51,18 +75,16 @@ The `start.sh` script will:
 
 1. ✓ Check and install system dependencies
 2. ✓ Set up Python virtual environment
-3. ✓ Download and configure Keycloak
+3. ✓ Download and configure Keycloak (~200MB)
 4. ✓ Clone Core and Nexus repositories
 5. ✓ Prompt for database passwords and set up databases
 6. ✓ Generate SSL certificates for HTTPS
 7. ✓ Configure all services
 8. ✓ Start the platform
 
-After core installation completes, press **Ctrl+C** to stop `start.sh`.
+**After core installation completes, press Ctrl+C to stop `start.sh`.**
 
-### Installing Additional Modules
-
-Now install the services you need:
+### 3. Install Additional Services (Optional)
 
 ```bash
 # Install individual modules
@@ -71,67 +93,26 @@ sudo ./install_manager.py install ledger      # Billing system
 sudo ./install_manager.py install knowledgetree  # Knowledge base (requires Neo4j)
 sudo ./install_manager.py install brainhair   # AI assistant
 
-# Or install all default apps
+# Or install all default apps at once
 sudo ./install_manager.py install-defaults
-```
 
-Then restart to run with all installed modules:
-
-```bash
+# Restart to activate new services
 ./start.sh
 ```
 
-## Step-by-Step Installation
+### 4. Access HiveMatrix
 
-### 1. Install PostgreSQL (Required)
+Open browser to `https://YOUR_SERVER_IP:443` (use your server's actual IP address, not localhost)
 
-HiveMatrix requires PostgreSQL for most services. Just install it and make sure it's running - the install scripts will handle all configuration:
+**Default credentials:**
+- Username: `admin`
+- Password: `admin`
 
-#### Ubuntu 24.04 PostgreSQL Installation
+**Important:** Change the default password after first login!
 
-```bash
-# Install PostgreSQL
-sudo apt update
-sudo apt install -y postgresql postgresql-contrib
+## Post-Installation
 
-# Start and enable PostgreSQL
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
-
-# Verify PostgreSQL is running
-sudo systemctl status postgresql
-```
-
-**That's it!** The HiveMatrix installer will:
-- Prompt you for database passwords during setup
-- Create database users automatically
-- Create all required databases
-- Configure service connections
-
-### 2. Clone Helm Repository
-
-```bash
-cd ~/Work
-mkdir -p hivematrix
-cd hivematrix
-git clone https://github.com/ruapotato/hivematrix-helm
-cd hivematrix-helm
-```
-
-### 3. Run the Installer
-
-```bash
-./start.sh
-```
-
-The first run will take several minutes as it:
-- Installs system packages
-- Downloads Keycloak (~200MB)
-- Clones repositories
-- Sets up databases
-- Generates configuration
-
-### 4. Monitor Installation
+### Monitor Installation
 
 The installer provides detailed output:
 
@@ -155,8 +136,6 @@ Checking Git...
 ... (continues with each step)
 ```
 
-### 5. Post-Installation
-
 After installation completes, you'll see:
 
 ```
@@ -174,77 +153,6 @@ After installation completes, you'll see:
   Important: Use your server's IP address, not localhost!
 
 ================================================================
-```
-
-## Installation Options
-
-### Installing Specific Services
-
-Use the `install_manager.py` script to install additional services:
-
-```bash
-cd hivematrix-helm
-
-# Install individual modules
-sudo ./install_manager.py install codex       # Central data hub
-sudo ./install_manager.py install ledger      # Billing system
-sudo ./install_manager.py install knowledgetree  # Knowledge base (requires Neo4j)
-sudo ./install_manager.py install brainhair   # AI assistant
-
-# Or install all default apps at once
-sudo ./install_manager.py install-defaults
-
-# Restart to activate new services
-./stop.sh
-./start.sh
-```
-
-### Installing Neo4j (for KnowledgeTree)
-
-If you want to use KnowledgeTree, you must install Neo4j first:
-
-#### Ubuntu 24.04 Neo4j Installation
-
-```bash
-# Install Java (required for Neo4j)
-sudo apt update
-sudo apt install -y openjdk-21-jre-headless
-
-# Add Neo4j repository
-wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/neo4j.gpg
-echo 'deb [signed-by=/usr/share/keyrings/neo4j.gpg] https://debian.neo4j.com stable latest' | sudo tee /etc/apt/sources.list.d/neo4j.list
-
-# Install Neo4j Community Edition
-sudo apt update
-sudo apt install -y neo4j
-
-# Set initial password
-sudo neo4j-admin dbms set-initial-password your-secure-password
-
-# Enable and start Neo4j
-sudo systemctl enable neo4j
-sudo systemctl start neo4j
-
-# Verify Neo4j is running
-sudo systemctl status neo4j
-```
-
-#### Configure Neo4j for HiveMatrix
-
-After installation, update KnowledgeTree's configuration:
-
-```bash
-# Edit KnowledgeTree config
-cd hivematrix-knowledgetree
-nano instance/knowledgetree.conf
-```
-
-Set the Neo4j password:
-```ini
-[database]
-neo4j_uri = bolt://localhost:7687
-neo4j_user = neo4j
-neo4j_password = your-secure-password
 ```
 
 ## Verifying Installation
