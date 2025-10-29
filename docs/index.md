@@ -161,7 +161,7 @@ When contributing to HiveMatrix:
 
 ## License
 
-[Add license information]
+HiveMatrix is released under the MIT License. See [LICENSE](https://github.com/ruapotato/hivematrix-docs/blob/main/LICENSE) for details.
 
 ## Support
 

@@ -56,8 +56,14 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Architecture: ARCHITECTURE.md
-  - AI Development Guide: CLAUDE.md
+  - Getting Started:
+    - Installation: installation.md
+    - Configuration: configuration.md
+  - Services:
+    - Overview: services-overview.md
+  - Reference:
+    - Architecture: ARCHITECTURE.md
+    - AI Development Guide: CLAUDE.md
 
 extra:
   social:
