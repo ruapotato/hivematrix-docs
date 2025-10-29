@@ -22,7 +22,15 @@ This guide will walk you through installing HiveMatrix from scratch on a Linux s
 
 Complete installation workflow for Ubuntu 24.04:
 
-### 1. Install Databases
+### 1. Install System Prerequisites
+
+```bash
+# Install Python development tools and venv
+sudo apt update
+sudo apt install -y python3-venv python3-dev build-essential
+```
+
+### 2. Install Databases
 
 #### PostgreSQL (Required)
 
@@ -56,7 +64,7 @@ sudo systemctl enable neo4j
 sudo systemctl start neo4j
 ```
 
-### 2. Install HiveMatrix
+### 3. Install HiveMatrix
 
 ```bash
 # Create HiveMatrix directory
@@ -84,7 +92,7 @@ The `start.sh` script will:
 
 **After core installation completes, press Ctrl+C to stop `start.sh`.**
 
-### 3. Install Additional Services (Optional)
+### 4. Install Additional Services (Optional)
 
 ```bash
 # Install individual modules
@@ -100,7 +108,7 @@ sudo ./install_manager.py install-defaults
 ./start.sh
 ```
 
-### 4. Access HiveMatrix
+### 5. Access HiveMatrix
 
 Open browser to `https://YOUR_SERVER_IP:443` (use your server's actual IP address, not localhost)
 
