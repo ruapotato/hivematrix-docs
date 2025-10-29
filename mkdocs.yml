@@ -36,7 +36,6 @@ theme:
 
 plugins:
   - search
-  - autorefs
 
 markdown_extensions:
   - admonition
