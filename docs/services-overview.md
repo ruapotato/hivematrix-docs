@@ -82,8 +82,9 @@ These services provide specific business functionality.
 **Repository**: [hivematrix-codex](https://github.com/ruapotato/hivematrix-codex)
 **Port**: 5010
 **Database**: PostgreSQL
+**[→ Detailed Documentation](services/codex.md)**
 
-The central data hub for MSP operations. Codex manages:
+The central data hub and API aggregation point for HiveMatrix. Codex serves as the "rolodex" managing:
 
 - **Companies**: Client and vendor information
 - **Contacts**: People associated with companies
@@ -140,8 +141,9 @@ Ledger integrates with Codex to bill clients for services.
 **Repository**: [hivematrix-knowledgetree](https://github.com/ruapotato/hivematrix-knowledgetree)
 **Port**: 5020
 **Database**: Neo4j (graph database)
+**[→ Detailed Documentation](services/knowledgetree.md)**
 
-Knowledge management with graph relationships. KnowledgeTree provides:
+Knowledge base system with hierarchical organization. KnowledgeTree provides:
 
 - **Graph-Based Knowledge**: Store information with relationships
 - **Hierarchical Organization**: Sections, categories, topics
