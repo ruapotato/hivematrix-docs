@@ -71,7 +71,40 @@ Then restart to run with all installed modules:
 
 ## Step-by-Step Installation
 
-### 1. Clone Helm Repository
+### 1. Install PostgreSQL (Required)
+
+HiveMatrix requires PostgreSQL for most services:
+
+#### Ubuntu 24.04 PostgreSQL Installation
+
+```bash
+# Install PostgreSQL
+sudo apt update
+sudo apt install -y postgresql postgresql-contrib
+
+# Start and enable PostgreSQL
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+
+# Verify PostgreSQL is running
+sudo systemctl status postgresql
+```
+
+#### Create PostgreSQL User for HiveMatrix
+
+```bash
+# Switch to postgres user
+sudo -u postgres psql
+
+# In PostgreSQL prompt, create user and grant privileges:
+CREATE USER hivematrix WITH PASSWORD 'your-secure-password';
+ALTER USER hivematrix CREATEDB;
+\q
+```
+
+**Note**: HiveMatrix services will create their own databases automatically. The `start.sh` script handles database creation.
+
+### 2. Clone Helm Repository
 
 ```bash
 cd ~/Work
@@ -81,7 +114,7 @@ git clone https://github.com/ruapotato/hivematrix-helm
 cd hivematrix-helm
 ```
 
-### 2. Run the Installer
+### 3. Run the Installer
 
 ```bash
 ./start.sh
@@ -94,7 +127,7 @@ The first run will take several minutes as it:
 - Sets up databases
 - Generates configuration
 
-### 3. Monitor Installation
+### 4. Monitor Installation
 
 The installer provides detailed output:
 
@@ -118,7 +151,7 @@ Checking Git...
 ... (continues with each step)
 ```
 
-### 4. Post-Installation
+### 5. Post-Installation
 
 After installation completes, you'll see:
 
@@ -164,19 +197,51 @@ sudo ./install_manager.py install-defaults
 
 ### Installing Neo4j (for KnowledgeTree)
 
-If you want to use KnowledgeTree, install Neo4j:
+If you want to use KnowledgeTree, you must install Neo4j first:
+
+#### Ubuntu 24.04 Neo4j Installation
 
 ```bash
-# Run the Neo4j installation script
-cd hivematrix-helm
-sudo bash install_neo4j.sh
+# Install Java (required for Neo4j)
+sudo apt update
+sudo apt install -y openjdk-21-jre-headless
+
+# Add Neo4j repository
+wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/neo4j.gpg
+echo 'deb [signed-by=/usr/share/keyrings/neo4j.gpg] https://debian.neo4j.com stable latest' | sudo tee /etc/apt/sources.list.d/neo4j.list
+
+# Install Neo4j Community Edition
+sudo apt update
+sudo apt install -y neo4j
+
+# Set initial password
+sudo neo4j-admin dbms set-initial-password your-secure-password
+
+# Enable and start Neo4j
+sudo systemctl enable neo4j
+sudo systemctl start neo4j
+
+# Verify Neo4j is running
+sudo systemctl status neo4j
 ```
 
-This will:
-- Add Neo4j apt repository
-- Install Neo4j Community Edition
-- Configure Neo4j for HiveMatrix
-- Set default password
+#### Configure Neo4j for HiveMatrix
+
+After installation, update KnowledgeTree's configuration:
+
+```bash
+# Edit KnowledgeTree config
+cd hivematrix-knowledgetree
+nano instance/knowledgetree.conf
+```
+
+Set the Neo4j password:
+```ini
+[database]
+neo4j_uri = bolt://localhost:7687
+neo4j_user = neo4j
+neo4j_password = your-secure-password
+```
 
 ## Verifying Installation
 
