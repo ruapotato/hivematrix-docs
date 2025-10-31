@@ -1,7 +1,7 @@
 # Claude AI Assistant Guidelines for HiveMatrix
 
 **VERSION:** 3.0
-**LAST UPDATED:** 2025-10-29
+**LAST UPDATED:** 2025-10-30
 
 ---
 
@@ -576,7 +576,9 @@ Before committing changes:
 
 ## Resources
 
-- **Architecture**: `ARCHITECTURE.md` (READ THIS FIRST!)
+- **Online Documentation**: https://ruapotato.github.io/hivematrix-docs/ (READ THIS FIRST!)
+- **Architecture Guide**: https://ruapotato.github.io/hivematrix-docs/ARCHITECTURE/
+- **Local Architecture**: `hivematrix-docs/docs/ARCHITECTURE.md`
 - **Service Template**: `https://github.com/ruapotato/hivematrix-template`
 - **Apps Registry**: `apps_registry.json`
 - **Debugging Tools**: `logs_cli.py`, `create_test_token.py`, `security_audit.py`
